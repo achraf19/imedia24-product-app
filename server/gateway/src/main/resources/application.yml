@@ -1,0 +1,28 @@
+server:
+  port: 8060
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    serviceUrl:
+      defaultZone: http://localhost:6781/eureka
+
+spring:
+  application:
+    name: gateway-service
+  cloud:
+    gateway:
+      routes:
+      - id: categoryModule
+        uri: http://localhost:8070
+        predicates:
+        - Path=/category/**
+      - id: productModule
+        uri: http://localhost:8080
+        predicates:
+        - Path=/product/**
+    
+
+
+

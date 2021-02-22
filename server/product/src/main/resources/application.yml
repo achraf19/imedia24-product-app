@@ -1,0 +1,17 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: product-service
+    
+  data:
+    mongodb:
+     uri: mongodb://achraf:achraf@localhost:27017/product_db
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    serviceUrl:
+      defaultZone: http://localhost:6781/eureka
