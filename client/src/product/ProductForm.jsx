@@ -7,13 +7,14 @@ const onSubmitForm = (formData) => {
 }
 
 
-const fetchCategories = () => {
-}
+export function ProductForm() {
 
+        const { nameInput, setName } = useState('')
+        const { priceInput, setPrice } = useState('')
+        const { quantityInput, setQt } = useState('')
+        const { nameInput, setName } = useState('')
+        const { nameInput, setName } = useState('')
 
-
-const ProductForm = () => {
-    
         const { register, handleSubmit, errors, watch, formState } = useForm({
             mode: 'onTouched'
         })

@@ -54,4 +54,33 @@ public class CategoryService {
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new CategoryNotFoundException("This category that you attempt to update does not exist in DB !"));
     }
+
+    // method deletes an existing product
+    public ResponseEntity<?> deleteCategory(String ID) {
+
+        try {
+            CR.deleteById(ID);
+            return ResponseEntity.status(HttpStatus.OK).body("The category with ID= "+ ID + "was successfully deleted !");
+
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An internal server occurs while deleting the category with ID= "+ ID);
+
+        }    
+    
+}
+
+    // method deletes all categories
+    public ResponseEntity<?> deleteCategories() {
+
+        try {
+            CR.deleteAll();
+            return ResponseEntity.status(HttpStatus.OK).body("All categories were successfully deleted !");
+
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An internal server occurs while deleting all the categories");
+
+        }    
+
+    }
+
 }

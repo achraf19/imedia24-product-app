@@ -1,14 +1,21 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import BootstrapTable from 'react-bootstrap-table-next';
-import ProductService from './ProductService'
 import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom'
 import Product from './ProductForm';
+import { fetchProducts } from './ProductService';
 
 
-class Products extends Component {
+function Products()  {
+    const [products, setProducts] = useState([])
+
+    useEffect(() => {
+        let mounted = false
+        fetchProducts().then(res => { if(mounted) { setProducts(res) }} )
+        return() => mounted = false
+
+    }, [])
     
-    state = { 
-        products:[],
+    const state = { 
         columns:[
             {
                 dataField: 'id',  
@@ -39,16 +46,6 @@ class Products extends Component {
         ]
         
     }
-
-   
-    componentDidMount() {
-        ProductService.fetchProducts().then(res => { this.setState({ products:res.data })})
-        
-    }
-     
-    render() { 
-
-        if(this.state.products.length == 0) return <h2>No products are available !</h2>  
        
         return ( 
             <div>
@@ -61,7 +58,7 @@ class Products extends Component {
                         </div>
                     </Router>
                     <div  >
-                        <BootstrapTable striped hover keyField='id' data={ this.state.products } columns={ this.state.columns } />  
+                        <BootstrapTable striped hover keyField='id' data={ products } columns={ state.columns } />  
                     </div>  
                 </div>
 
@@ -72,7 +69,7 @@ class Products extends Component {
                 </div>
             </div>
         )
-    }
+    
     
 }
  

@@ -47,4 +47,54 @@ public class ProductService {
          PR.save(product);
          return ResponseEntity.status(HttpStatus.CREATED).body("this product is added succesfully !");
     }
+
+    // method updates an existing product
+    public ResponseEntity<?> updateProduct(String ID, Product updatedProduct) {
+        Optional<Product> product = PR.findById(ID);
+
+            if(product.isPresent()) {
+                Product productToUpdate = product.get();
+                productToUpdate.setName(updatedProduct.getName());
+                productToUpdate.setPrice(updatedProduct.getPrice());
+                productToUpdate.setQuantity(updatedProduct.getQuantity());
+                productToUpdate.setCategory(updatedProduct.getCategory());
+                productToUpdate.setDescription(updatedProduct.getDescription());
+
+                PR.save(productToUpdate);
+
+                return ResponseEntity.status(HttpStatus.OK).body("The product with ID= "+ updatedProduct.getID() + "was successfully updated !");
+            }
+            else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        
+    }
+
+    // method deletes an existing product
+    public ResponseEntity<?> deleteProduct(String ID) {
+
+            try {
+                PR.deleteById(ID);
+                return ResponseEntity.status(HttpStatus.OK).body("The product with ID= "+ ID + "was successfully deleted !");
+
+            } catch (Exception e) {
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An internal server occurs while deleting the product with ID= "+ ID);
+
+            }    
+        
+    }
+
+    // method deletes all products
+    public ResponseEntity<?> deleteProducts() {
+
+        try {
+            PR.deleteAll();
+            return ResponseEntity.status(HttpStatus.OK).body("All products were successfully deleted !");
+
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An internal server occurs while deleting all the products");
+
+        }    
+    
+}
 }

@@ -1,17 +1,13 @@
 import React, { Component } from 'react';
-import axios from 'axios'
-import { productForm } from './ProductForm'
+import { axios } from 'axios';
 
-const PROD_SERVICE =  'http://localhost:8060'
-const CAT_SERVICE =  'http://localhost:8060'
+const PROD_SERVICE = 'localhost:8060/product'
 
-class ProductService {
-
-    fetchProducts() { return axios.get(`${PROD_SERVICE}/product/all`)  }
-    fetchCategories() { return axios.get(`${CAT_SERVICE}/category/all`)  }
-
-    
-
+export function fetchProducts() {
+    axios.get(PROD_SERVICE + '/all')
+         .then(res => res.json())
 }
 
-export default new ProductService()
+export function addProduct(product) {
+    axios.post(PROD_SERVICE + '/add', { product }).then(res => res.json())
+}
