@@ -1,16 +1,16 @@
-import React, { Component, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import BootstrapTable from 'react-bootstrap-table-next';
 import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom'
 import Product from './ProductForm';
-import { fetchProducts } from './ProductService';
+import PS  from './ProductService';
 
 
 function Products()  {
     const [products, setProducts] = useState([])
 
     useEffect(() => {
-        let mounted = false
-        fetchProducts().then(res => { if(mounted) { setProducts(res) }} )
+        let mounted = true
+        PS.fetchProducts().then(res => { if (mounted) { setProducts(res.data.json()) } } )
         return() => mounted = false
 
     }, [])

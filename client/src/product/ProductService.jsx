@@ -1,13 +1,15 @@
-import React, { Component } from 'react';
-import { axios } from 'axios';
+import React from 'react';
+import axios  from 'axios';
 
 const PROD_SERVICE = 'localhost:8060/product'
 
-export function fetchProducts() {
-    axios.get(PROD_SERVICE + '/all')
-         .then(res => res.json())
+class ProductService {
+
+    fetchProducts() {
+        axios.get(`${PROD_SERVICE}/all`)
+    }
 }
 
-export function addProduct(product) {
-    axios.post(PROD_SERVICE + '/add', { product }).then(res => res.json())
-}
+export default new ProductService()
+ 
+

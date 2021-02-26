@@ -13,6 +13,15 @@ spring:
     name: gateway-service
   cloud:
     gateway:
+      globalcors:
+       corsConfigurations:
+        '[/**]':
+            allowedOrigins: "http://localhost:3000"
+            allowedHeaders:
+              - content-type
+            allowedMethods: 
+            - GET
+            - POST
       routes:
       - id: categoryModule
         uri: http://localhost:8070

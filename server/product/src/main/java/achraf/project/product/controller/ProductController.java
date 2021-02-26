@@ -19,7 +19,6 @@ import achraf.project.product.model.Product;
 import achraf.project.product.service.ProductService;
 
 @Controller
-@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("product")
 public class ProductController {
 

@@ -21,8 +21,10 @@ public class Product {
     private @Id String ID = UUID.randomUUID().toString();
     private String name;
     private String price;
+    private String currency;
     private int quantity;
-    private String description;
     private String category;
+    private String description;
+    
     
 }
